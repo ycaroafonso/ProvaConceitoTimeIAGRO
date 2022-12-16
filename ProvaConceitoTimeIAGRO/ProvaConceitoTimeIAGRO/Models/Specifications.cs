@@ -10,7 +10,7 @@ namespace ProvaConceitoTimeIAGRO.Models
 
         [JsonProperty("Page count")]
         public int Pagecount { get; set; }
-        public string Illustrator { get; set; }
-        public List<string> Genres { get; set; }
+        public List<string>? Illustrator { get; set; }
+        public List<string>? Genres { get; set; }
     }
 }
