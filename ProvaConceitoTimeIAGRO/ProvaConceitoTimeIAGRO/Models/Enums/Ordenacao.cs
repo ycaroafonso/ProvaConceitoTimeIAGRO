@@ -7,6 +7,6 @@ namespace ProvaConceitoTimeIAGRO.Models.Enums
         [Description("asc")]
         asc = 1,
         [Description("desc")]
-        desc = 0
+        desc = -1
     }
 }

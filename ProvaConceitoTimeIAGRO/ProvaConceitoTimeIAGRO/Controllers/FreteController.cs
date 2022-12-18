@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ProvaConceitoTimeIAGRO.Models;
 using ProvaConceitoTimeIAGRO.Repository;
 using ProvaConceitoTimeIAGRO.Service;
 
@@ -12,11 +12,16 @@ namespace ProvaConceitoTimeIAGRO.Controllers
         [HttpGet]
         public decimal Calcular(int idLivro)
         {
-            var produtoRepository = new ProdutoRepository();
-            var calcularValorDoFreteService = new CalcularValorDoFreteService(produtoRepository);
+            ProdutoRepository produtoRepository = new ProdutoRepository();
+            Produto produto = produtoRepository.ObterUnico(idLivro);
 
-            calcularValorDoFreteService.SelecionarProduto(idLivro);
+
+            var calcularValorDoFreteService = new CalcularValorDoFreteService();
+            calcularValorDoFreteService.AddProduto(produto);
+
+
             var valorDoFrete = calcularValorDoFreteService.CalcularFreteDe20PorCento();
+
 
             return valorDoFrete;
         }

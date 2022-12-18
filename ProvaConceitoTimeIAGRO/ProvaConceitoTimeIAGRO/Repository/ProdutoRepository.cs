@@ -14,5 +14,10 @@ namespace ProvaConceitoTimeIAGRO.Repository
             return produtos;
 
         }
+
+        public Produto ObterUnico(int idProduto)
+        {
+            return ObterTodosOsProdutos().SingleOrDefault(c => c.id == idProduto);
+        }
     }
 }

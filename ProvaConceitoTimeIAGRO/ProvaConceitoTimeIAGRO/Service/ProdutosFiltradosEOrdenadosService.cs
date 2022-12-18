@@ -1,25 +1,16 @@
 ﻿using ProvaConceitoTimeIAGRO.Models;
 using ProvaConceitoTimeIAGRO.Models.Enums;
-using ProvaConceitoTimeIAGRO.Repository;
 
 namespace ProvaConceitoTimeIAGRO.Service
 {
     public class ProdutosFiltradosEOrdenadosService
     {
-        private ProdutoRepository _produtoRepository;
         private List<Produto> _produtos;
+        public List<Produto> ProdutosFiltrados { get; set; }
 
-        public ProdutosFiltradosEOrdenadosService(ProdutoRepository produtoRepository)
+        public ProdutosFiltradosEOrdenadosService(List<Produto> produtos)
         {
-            _produtoRepository = produtoRepository;
-
-            _produtos = _produtoRepository.ObterTodosOsProdutos();
-        }
-
-
-        public List<Produto> ObterRetorno()
-        {
-            return _produtos;
+            ProdutosFiltrados = produtos;
         }
 
 
@@ -31,7 +22,7 @@ namespace ProvaConceitoTimeIAGRO.Service
         {
             pesquisa = pesquisa.ToLower();
 
-            _produtos = _produtos
+            ProdutosFiltrados = ProdutosFiltrados
                 .Where(c =>
                     c.name.ToLower().Contains(pesquisa) ||
                     c.specifications.Originallypublished.ToLower().Contains(pesquisa) ||
@@ -49,10 +40,10 @@ namespace ProvaConceitoTimeIAGRO.Service
             switch (ordenacao)
             {
                 case Ordenacao.asc:
-                    _produtos = _produtos!.OrderBy(c => c.price).ToList();
+                    ProdutosFiltrados = ProdutosFiltrados!.OrderBy(c => c.price).ToList();
                     break;
                 case Ordenacao.desc:
-                    _produtos = _produtos!.OrderByDescending(c => c.price).ToList();
+                    ProdutosFiltrados = ProdutosFiltrados!.OrderByDescending(c => c.price).ToList();
                     break;
             }
         }

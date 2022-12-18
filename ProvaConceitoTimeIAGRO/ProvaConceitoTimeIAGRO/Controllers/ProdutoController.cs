@@ -16,19 +16,19 @@ namespace ProvaConceitoTimeIAGRO.Controllers
         /// 
         /// </summary>
         /// <param name="q"></param>
-        /// <param name="ordenacao">0 = asc; 1 = desc</param>
+        /// <param name="ordenacao">1 = asc; -1 = desc</param>
         /// <returns></returns>
         [HttpGet]
         public List<Produto> GetAll(string q = "", [Required] Ordenacao ordenacao = Ordenacao.asc)
         {
             var produtoRepository = new ProdutoRepository();
-            var produtosFiltradosEOrdenadosService = new ProdutosFiltradosEOrdenadosService(produtoRepository);
+            var produtos = produtoRepository.ObterTodosOsProdutos();
 
+            var produtosFiltradosEOrdenadosService = new ProdutosFiltradosEOrdenadosService(produtos);
             produtosFiltradosEOrdenadosService.Filtrar(q);
-
             produtosFiltradosEOrdenadosService.OrdenarPorPrice(ordenacao);
 
-            return produtosFiltradosEOrdenadosService.ObterRetorno();
+            return produtosFiltradosEOrdenadosService.ProdutosFiltrados;
         }
     }
 }

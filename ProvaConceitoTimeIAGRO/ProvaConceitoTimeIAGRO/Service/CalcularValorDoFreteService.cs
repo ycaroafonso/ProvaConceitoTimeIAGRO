@@ -1,29 +1,25 @@
 ﻿using ProvaConceitoTimeIAGRO.Models;
-using ProvaConceitoTimeIAGRO.Repository;
 
 namespace ProvaConceitoTimeIAGRO.Service
 {
     public class CalcularValorDoFreteService
     {
-        private ProdutoRepository _produtoRepository;
-        private List<Produto> _produtos;
-        private Produto? _produto;
+        private decimal _total = 0;
 
-        public CalcularValorDoFreteService(ProdutoRepository produtoRepository)
+        public CalcularValorDoFreteService()
         {
-            _produtoRepository = produtoRepository;
-
-            _produtos = _produtoRepository.ObterTodosOsProdutos();
         }
 
-        public void SelecionarProduto(int id)
+
+        public void AddProduto(Produto produto)
         {
-            _produto = _produtos.Where(c => c.id == id).SingleOrDefault();
+            _total += produto.price;
         }
+
 
         public decimal CalcularFreteDe20PorCento()
         {
-            return _produto!.price * 0.20M;
+            return _total * 0.2M;
         }
     }
 }
