@@ -11,11 +11,11 @@ namespace ProvaConceitoTimeIAGRO.Repository
             var arquivoJsonDeProdutos = File.ReadAllText(Path.Combine("Data", "books.json"));
             var produtos = JsonConvert.DeserializeObject<List<Produto>>(arquivoJsonDeProdutos);
 
-            return produtos;
+            return produtos!;
 
         }
 
-        public Produto ObterUnico(int idProduto)
+        public Produto? ObterUnico(int idProduto)
         {
             return ObterTodosOsProdutos().SingleOrDefault(c => c.id == idProduto);
         }
